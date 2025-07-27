@@ -61,7 +61,11 @@ def extract_text(file_path: Path) -> str:
     raise ValueError(f"Unsupported file type: {file_path}")
 
 
-def chunk_text(text: str, chunk_size: int = 500) -> Iterable[str]:
-    """Yield fixed-size chunks from text."""
-    for i in range(0, len(text), chunk_size):
-        yield text[i : i + chunk_size]
+def chunk_text(text: str, chunk_size: int = 200, overlap: int = 50) -> Iterable[str]:
+    """Yield overlapping word chunks from text."""
+    words = text.split()
+    start = 0
+    while start < len(words):
+        end = start + chunk_size
+        yield " ".join(words[start:end])
+        start += chunk_size - overlap

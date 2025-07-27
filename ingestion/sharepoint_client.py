@@ -34,3 +34,19 @@ class SharePointClient:
                 time.sleep(poll_interval)
             except Exception as e:
                 print(f"SharePoint watch error: {e}")
+
+
+class DummySharePointClient(SharePointClient):
+    """Client returning canned data for testing."""
+
+    def __init__(self) -> None:
+        super().__init__("https://sharepoint.example.com", {})
+
+    def list_documents(self) -> List[str]:
+        return [
+            "https://sharepoint.example.com/docs/doc1.txt",
+            "https://sharepoint.example.com/docs/doc2.txt",
+        ]
+
+    def download_document(self, url: str) -> bytes:
+        return b"Dummy document contents for " + url.encode()
