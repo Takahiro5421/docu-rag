@@ -18,11 +18,14 @@ class VectorStore:
         self.records: List[VectorRecord] = []
 
     def add(self, text: str, metadata: dict) -> None:
+        """Add a record to the store."""
         vector = self._embed(text)
         self.records.append(VectorRecord(text, vector, metadata))
 
     def query(self, vector: Sequence[float], top_k: int = 5) -> List[VectorRecord]:
         """Return top_k similar records (naive)."""
+        if top_k <= 0:
+            raise ValueError("top_k must be positive")
         return self.records[:top_k]
 
     def _embed(self, text: str) -> List[float]:
