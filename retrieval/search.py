@@ -2,7 +2,7 @@
 
 from typing import List
 
-from .vector_store import VectorStore, VectorRecord
+from .vector_store import VectorStore, VectorRecord, embed_text
 from .ranker import rerank
 
 
@@ -22,4 +22,4 @@ class Searcher:
             raise RuntimeError(f"Search failed: {e}") from e
 
     def _embed(self, text: str) -> List[float]:
-        return [0.0]
+        return embed_text(text)

@@ -2,7 +2,7 @@
 
 from typing import List
 
-from retrieval.vector_store import VectorStore, VectorRecord
+from retrieval.vector_store import VectorStore, VectorRecord, embed_text
 
 
 class MemoryIndex:
@@ -13,5 +13,5 @@ class MemoryIndex:
         self.store.add(text=text, metadata=metadata)
 
     def search(self, query: str, top_k: int = 3) -> List[VectorRecord]:
-        vector = [0.0]
+        vector = embed_text(query)
         return self.store.query(vector, top_k=top_k)
