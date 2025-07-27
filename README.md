@@ -10,6 +10,3 @@ Simple RAG system skeleton for internal document QA. Documents stay on-premise a
 - `memory/` - conversation history logging and search.
 - `api_server.py` - FastAPI application exposing `/query` and `/generate`.
 - `ui/` - minimal chat frontend with conversation view.
-
-For a high level description of the RAG pipeline in Japanese see
-[`docs/rag_architecture_jp.md`](docs/rag_architecture_jp.md).
